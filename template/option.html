@@ -1,0 +1,88 @@
+<html>
+<meta name="google-signin-client_id" content="848583635297-jnrd7p3q70tq9msn46233jp3evv1p8gj.apps.googleusercontent.com">
+<head>
+<title>Option</title>
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="../js/custom.js"></script> 
+<link rel="stylesheet" type="text/css" href="../css/custom.css">
+
+
+</head>
+<body class='hide' onload="getProcessDetails();isAdmin().then(showGpuToggle);">
+
+<div class="page-header">
+<div class="page-header-container">
+  <img src="../images/logo.png" class="image-logo"/ height="30px">
+    <div class="col-sm-1 pull-right" >
+  <button href="#" class="btn btn-primary pull-right" onclick="logout();">Sign out</a>
+  </div>
+  <div class="col-sm-2 pull-right" id="gpuAdmin" style="display: none;">
+  <span><b>GPU Status</b> &nbsp</span>
+  <input data-toggle="toggle" type="checkbox" id="gputoogle" onchange="gpuStatusChange()">
+  </div>
+
+  </div>
+</div>
+</div>
+
+<div class="container">
+<div class="container-div-option">
+  <div class="col-md-5 align-option">  
+          <button type="button" class="btn btn-primary align-option-button" onclick="window.location.href='configform.html'">Configuration</button>
+  </div>
+  <div class="col-md-5 align-option">
+         <button type="button" class="btn btn-primary align-option-button" onclick="window.location.href='jobDetails.html'">Job Details</button>
+  </div>
+</div>
+</div>
+
+<div class="container">
+<center>
+<table class="table" id="optionTable">
+    <thead class="text-center">
+      <tr>
+        <th class="text-center">Total Jobs</th>
+        <th class="text-center">Jobs Completed</th>
+        <th class="text-center">Jobs Fails</th>
+      </tr>
+    </thead>
+    <tbody class="text-center" id="optionTableBody">
+    </tbody>
+  </table>
+  </center>
+</div>
+
+<div class="container" >
+  <div class="modal fade" id="gpuAlertModel" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">GPU Action Confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure to change the current GPU State?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendGpuRequest(1)">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"  onclick="sendGpuRequest(2)">No</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+</html>

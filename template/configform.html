@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Config</title>
+ <!-- Latest compiled and minified CSS -->
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script src="../js/custom.js"></script> 
+<script src="../js/notify.js"></script> 
+
+<link rel="stylesheet" type="text/css" href="../css/custom.css">
+
+</head>
+<body class='hide' onload="isAdmin().then(getConfigDetails);">
+
+
+<div class="page-header">
+<div class="page-header-container">
+  <a href="option.html">
+  <img src="../images/logo.png" class="image-logo"/ height="30px"></a>
+  <button href="#" class="btn btn-primary pull-right" onclick="logout();">Sign out</a>
+</div>
+</div>
+
+<!-- <div class="container">
+<span class="font-config-style">Current Configuration</span>
+<br><br>
+<center>
+<table class="table" id="optionTable">
+    <thead class="text-center">
+      <tr>
+        <th class="text-center">Alpha</th>
+        <th class="text-center">Beta</th>
+        <th class="text-center">No of Iteration</th>
+        <th class="text-center">Layer Content</th>
+        <th class="text-center">Style Content & Weight</th>
+      </tr>
+    </thead>
+    <tbody class="text-center" id="configTableBody">
+    </tbody>
+  </table>
+  </center>
+</div> -->
+
+
+<div class="container">
+<div id="config">
+  <div class="col-md-12" id="AdminLabel">
+  <div class="form-group col-md-6">
+    <label for="formGroupExampleInput2">Style Layer</label>
+
+        <select class="form-control" id="stylelayer">
+          <option selected="selected">conv1_1</option>
+          <option>conv1_2</option>
+          <option>conv2_1</option>
+          <option>conv2_2</option>
+          <option>conv3_1</option>
+          <option>conv3_2</option>
+          <option>conv3_3</option>
+          <option>conv3_4</option>
+          <option>conv4_1</option>
+          <option>conv4_2</option>
+          <option>conv4_3</option>
+          <option>conv4_4</option>          
+          <option>conv5_1</option>
+          <option>conv5_2</option>
+          <option>conv5_3</option>
+          <option>conv5_4</option>
+        </select>
+
+<!--     <input type="text" class="form-control" id="stylelayer" placeholder="Style Layer"> -->
+  </div>
+    <div class="form-group col-md-5">
+    <label for="formGroupExampleInput2">Weight</label>
+    <input type="number" class="form-control" id="Weight" placeholder="Weight">
+  </div>
+    <div class="form-group col-md-1 icon-margin-top" id='addStyle'>
+      <img src="../images/addicon.png" width="50px" height="50px" onclick="addstyleweight()" />      
+    </div>
+  </div>
+  <div class="col-md-12" id="nonAdminLabel">
+    <div class="form-group col-md-6">
+
+        <label for="formGroupExampleInput2">Style Layer & Weight</label>
+      </div>
+  </div>
+
+  <div class="col-md-12" id="liststyle">
+
+<!-- 
+        <div class="panel panel-default panel-heading col-md-3" id="div-style">
+        <div class="liststyle-div-padding" id="data-style">
+        <span id="style">hello | 11.00</span>
+        <img class= "pull-right" src="images/remove.png" width="15px" height="15px" onclick="removestyle()" />
+        </div>
+        </div>
+
+ -->
+  </div>
+
+
+
+  <div class="col-md-12">
+    <div class="col-md-3 form-group">
+    <label for="formGroupExampleInput2">Alpha Value</label>
+    <input type="number" class="form-control" id="Alpha" placeholder="Alpha Value" min="0">
+    </div>
+    <div class="col-md-3 form-group">
+    <label for="formGroupExampleInput2">Beta Value</label>
+    <input type="number" class="form-control" id="Beta" placeholder="Beta Value" min="0">
+    </div>
+    <div class="col-md-3 form-group">
+    <label for="formGroupExampleInput2">No. of Iteration</label>
+    <input type="number" class="form-control" id="Iteration" min="0" placeholder="No. of Iteration" required >
+    </div>
+    <div class="col-md-3 form-group">
+    <label for="formGroupExampleInput2">Layer Content</label>
+        <select class="form-control" id="layercontent">
+          <option>conv1_1</option>
+          <option>conv1_2</option>
+          <option>conv2_1</option>
+          <option>conv2_2</option>
+          <option>conv3_1</option>
+          <option>conv3_2</option>
+          <option>conv3_3</option>
+          <option>conv3_4</option>
+          <option>conv4_1</option>
+          <option>conv4_2</option>
+          <option>conv4_3</option>
+          <option>conv4_4</option>          
+          <option>conv5_1</option>
+          <option>conv5_2</option>
+          <option>conv5_3</option>
+          <option>conv5_4</option>
+        </select>
+    </div>
+  </div>
+
+<!--   <div class="col-md-12">
+   <div class="col-md-12 form-group">
+    <label for="formGroupExampleInput2">Layer Content</label>
+        <select class="form-control" id="layercontent">
+          <option selected="selected">conv1_1</option>
+          <option>conv1_2</option>
+          <option>conv2_1</option>
+          <option>conv2_2</option>
+          <option>conv3_1</option>
+          <option>conv3_2</option>
+          <option>conv3_3</option>
+          <option>conv3_4</option>
+          <option>conv4_1</option>
+          <option>conv4_2</option>
+          <option>conv4_3</option>
+          <option>conv4_4</option>          
+          <option>conv5_1</option>
+          <option>conv5_2</option>
+          <option>conv5_3</option>
+          <option>conv5_4</option>
+        </select>
+    <input type="text" class="form-control" id="layercontent" placeholder="Layer Content"> 
+    </div>
+   </div> -->
+<!--   <div class="col-md-12">
+   <div class="form-group">
+    <label for="formGroupExampleInput2">Beta Value</label>
+    <input type="number" class="form-control" id="Beta" placeholder="Beta Value" min="0">
+  </div>
+  </div>
+ -->
+<!-- 
+  <div class="col-md-12">
+   <div class="form-group">
+    <label for="formGroupExampleInput2">No. of Iteration</label>
+    <input type="number" class="form-control" id="Iteration" min="0" placeholder="No. of Iteration" required >
+  </div>
+  </div> -->
+
+<!--   <div class="col-md-12">
+ -->
+  <button class="btn btn-primary" id="configformbutton" onclick="formsubmit()" style="margin-left: 30px;">Submit</button>
+<!--     </div>
+ --></div>
+</div>
+</body>
+</html>

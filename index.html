@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<meta name="google-signin-client_id" content="852074829307-ius4jash44lqjs5psm1s3pfv1tk68nlr.apps.googleusercontent.com">
+<head>
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<!-- <script src="js/custom.js"></script> --> 
+<script src="js/jquery-cookie.js"></script> 
+
+
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+</head>
+
+<div class="page-header">
+<div class="page-header-container">
+  <img src="images/logo.png" class="image-logo"/ height="30px">
+</div>
+</div>
+
+<body>
+  <div id="gConnect">
+  <center>
+    <div id="signin-button"  style="margin-top: 15%;width: 300px;"></div>
+  </center>
+  </div>
+<script type="text/javascript">
+
+var auth2 = {};
+
+var updateSignIn = function() {
+  // console.log('update sign in state');
+  if (auth2.isSignedIn.get()) {
+    if(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail().includes("@gmail.com")){
+        // console.log('signed in');
+        sessionStorage.setItem("token",gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token);
+        sessionStorage.setItem("emailId",gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
+        window.location.href="template/option.html";
+        // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
+    }
+    else{
+        logout();
+    }
+  }
+}
+
+function startApp() {
+  gapi.load('auth2', function() {
+    gapi.client.load('plus','v1').then(function() {
+      gapi.signin2.render('signin-button', {
+          scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+          fetch_basic_profile: false });
+      gapi.auth2.init({scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',fetch_basic_profile: false }).then(
+            function (){
+              // console.log('init');
+              auth2 = gapi.auth2.getAuthInstance();
+              auth2.isSignedIn.listen(updateSignIn);
+              auth2.then(updateSignIn);
+            });
+    });
+  });
+}
+
+var logout = function() {
+    sessionStorage.clear();
+    document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost/google_config";
+}
+
+</script>
+<script src="https://apis.google.com/js/client:platform.js?onload=startApp"></script>
+</body>
+</html>
